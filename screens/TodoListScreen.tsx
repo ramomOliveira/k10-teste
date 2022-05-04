@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Button, StyleSheet, TextInput } from 'react-native';
+import { Button, ScrollView, StyleSheet, TextInput } from 'react-native';
 import { Text, View } from '../components/Themed';
 
 export type Task = {
@@ -49,7 +49,19 @@ function Todo() {
     {
       title: "Hangout with friends",
       completed: false
-    }
+    },
+    {
+      title: "Hangout with friends",
+      completed: false
+    },
+    {
+      title: "Hangout with friends",
+      completed: false
+    },
+    {
+      title: "Hangout with friends",
+      completed: false
+    },
   ]);
 
   const AddTask = (title: string) => {
@@ -71,16 +83,16 @@ function Todo() {
       justifyContent: 'flex-start',
 
     }}>
-
-      {tasks.map((task, index) => (
-        <Task
-          onCompleted={CompleteTask}
-          task={task}
-          index={index}
-          key={index}
-        />
-      ))}
-
+      <ScrollView>
+        {tasks.map((task, index) => (
+          <Task
+            onCompleted={CompleteTask}
+            task={task}
+            index={index}
+            key={index}
+          />
+        ))}
+      </ScrollView>
       <View>
         <CreateTask AddTask={AddTask} />
       </View>
