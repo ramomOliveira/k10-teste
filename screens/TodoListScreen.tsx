@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Button, ScrollView, StyleSheet, TextInput } from 'react-native';
+import { Button, ScrollView, StyleSheet, TextInput, } from 'react-native';
 import { Text, View } from '../components/Themed';
+import { ButtonAdd, ButtonText, TaskLine, ButtonDone, TextInputTask, Container } from '../styles/style-todoListScreen';
 
 export type Task = {
   title: string
@@ -10,29 +11,26 @@ export type Task = {
 
 export default function TodoListScreen() {
   return (
-    <View style={styles.container}>
+    <Container>
       <Todo />
-    </View>
+    </Container>
   );
 }
 
 function Task(props: { task: Task, index: number, onCompleted: (index: number) => void }) {
   return (
-    <View style={{
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      marginBottom: 10,
-    }}>
+    <TaskLine >
       <Text style={{
         textDecorationLine: props.task.completed ? "line-through" : "none",
         marginRight: 20
       }}>
         {props.task.title}
       </Text>
-      <Button onPress={() => (props.onCompleted(props.index))} title={props.task.completed ? "Undone" : "Done"} />
-    </View >
+
+      <ButtonDone onPress={() => (props.onCompleted(props.index))} >
+        <ButtonText>{props.task.completed ? "Undone" : "Done"}</ButtonText>
+      </ButtonDone>
+    </TaskLine >
   );
 }
 
@@ -49,24 +47,14 @@ function Todo() {
     {
       title: "Hangout with friends",
       completed: false
-    },
-    {
-      title: "Hangout with friends",
-      completed: false
-    },
-    {
-      title: "Hangout with friends",
-      completed: false
-    },
-    {
-      title: "Hangout with friends",
-      completed: false
-    },
+    }
+
   ]);
 
-  const AddTask = (title: string) => {
+  const AddTask = async (title: string) => {
     const newTasks = [...tasks, { title, completed: false }];
     setTasks(newTasks);
+
   };
 
   const CompleteTask = (index: number) => {
@@ -103,21 +91,24 @@ function Todo() {
 function CreateTask(props: { AddTask: (value: string) => void }) {
   const [value, setValue] = useState("");
 
+
   const handleSubmit = () => {
     if (!value) return;
     props.AddTask(value);
     setValue("");
   }
 
+
   return (
     <View>
-      <TextInput
-        style={{ backgroundColor: '#ffffff', padding: 10, color: '#000000' }}
+      <TextInputTask
         value={value}
         placeholder="Add a new task"
         onChangeText={e => setValue(e)}
       />
-      <Button onPress={handleSubmit} title={"Add"} />
+      <ButtonAdd onPress={handleSubmit}>
+        <ButtonText>Add</ButtonText>
+      </ButtonAdd>
     </View>
   );
 }
