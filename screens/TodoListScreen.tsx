@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Button, ScrollView, StyleSheet, TextInput, } from 'react-native';
-import { Text, View } from '../components/Themed';
-import { ButtonAdd, ButtonText, TaskLine, ButtonDone, TextInputTask, Container } from '../styles/style-todoListScreen';
+import { ScrollView } from 'react-native';
+import { View } from '../components/Themed';
+import { ButtonAdd, ButtonText, TaskLine, ButtonDone, TextInputTask, Container, TextTask, Wrapper } from '../styles/style-todoListScreen';
 
 export type Task = {
   title: string
@@ -20,15 +20,19 @@ export default function TodoListScreen() {
 function Task(props: { task: Task, index: number, onCompleted: (index: number) => void }) {
   return (
     <TaskLine >
-      <Text style={{
-        textDecorationLine: props.task.completed ? "line-through" : "none",
-        marginRight: 20
-      }}>
+      <TextTask
+        completed={props.task.completed}
+      >
         {props.task.title}
-      </Text>
+      </TextTask>
 
-      <ButtonDone onPress={() => (props.onCompleted(props.index))} >
-        <ButtonText>{props.task.completed ? "Undone" : "Done"}</ButtonText>
+      <ButtonDone
+        isDone={props.task.completed}
+        onPress={() => (props.onCompleted(props.index))}
+      >
+        <ButtonText>
+          {props.task.completed ? "Undone" : "Done"}
+        </ButtonText>
       </ButtonDone>
     </TaskLine >
   );
@@ -64,13 +68,7 @@ function Todo() {
   };
 
   return (
-    <View style={{
-      display: 'flex',
-      width: '90%',
-      height: '100%',
-      justifyContent: 'flex-start',
-
-    }}>
+    <Wrapper>
       <ScrollView>
         {tasks.map((task, index) => (
           <Task
@@ -84,20 +82,18 @@ function Todo() {
       <View>
         <CreateTask AddTask={AddTask} />
       </View>
-    </View>
+    </Wrapper>
   );
 }
 
 function CreateTask(props: { AddTask: (value: string) => void }) {
   const [value, setValue] = useState("");
 
-
   const handleSubmit = () => {
     if (!value) return;
     props.AddTask(value);
     setValue("");
   }
-
 
   return (
     <View>
@@ -113,19 +109,3 @@ function CreateTask(props: { AddTask: (value: string) => void }) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
