@@ -64,3 +64,5 @@ $ yarn install
 #iniciar o projeto
 $ yarn start #para rodar em desenvolvimento
 ```
+
+- Obs: A Task bônus não conclui, pois foi meu primeiro contato com projeto Mobile, ai teria que pesquisar mais sobre o assunto para poder realizar.
