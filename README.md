@@ -16,6 +16,20 @@ Projeto feito em React Native, uma lista básica de tarefas
   <img alt="Imagen apk" src="github/appk10.jpeg" width="120px">
 </p>
 
+  - Apk está na raiz do projeto [appK10.apk](https://github.com/ramomOliveira/k10-teste/blob/main/appK10.apk/)
+
+## 🚀 Instalação do Apk no Smartphone Android
+
+Baixe o apk em seu smartphone.
+
+```bash
+  1 - Acesse as Configurações.
+  2 - Aplicativos em opções.
+  3 - Acesso especial de apps, toque em Instalar apps desconhecidos.
+  4 - Escolha a pasta ou de aplicativo onde esta baixado o apk.
+  5 - Depois a instalação e normal.
+```
+
 <br />
 
 ## 🧪 Tecnologias
